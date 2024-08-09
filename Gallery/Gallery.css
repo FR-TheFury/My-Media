@@ -6,6 +6,7 @@
 
   body{
     background-image: "https://i.imgur.com/Ka54W4A.jpeg";
+    background-repeat: repeat;
   }
   
   .gallery-track {
