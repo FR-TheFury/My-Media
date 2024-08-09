@@ -8,6 +8,8 @@
   body{
     background: url("https://i.imgur.com/Ka54W4A.jpeg");
     background-repeat: repeat;
+    font-family: "Poppins", sans-serif;
+    min-height: 100vh;
   }
   
   .gallery-track {
@@ -46,15 +48,10 @@
       grid-template-columns: repeat(1,1fr);
     }
   }
- 
-  body {
-    font-family: "Poppins", sans-serif;
-    background: linear-gradient(rgba(12, 3, 51, 0.3), rgba(12, 3, 51, 0.3));
-    min-height: 100vh;
-  }
-  
+
   header {
     position: fixed;
+    background-color: rgba(0, 0, 0, 0.705);
     top: 0;
     left: 0;
     width: 100%;
