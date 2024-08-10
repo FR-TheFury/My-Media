@@ -414,7 +414,7 @@ p {
 .footer {
     background-color: #e74c3c;
     color: white;
-    position: fixed;
+    position: sticky;
     text-align: center;
     padding: 10px 0;
     margin-top: 40px;
