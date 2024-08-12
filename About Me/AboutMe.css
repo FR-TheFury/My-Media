@@ -17,6 +17,7 @@ body {
 
 header {
   position: fixed;
+  background-color: rgba(0, 0, 0, 0.705);
   top: 0;
   left: 0;
   width: 100%;
