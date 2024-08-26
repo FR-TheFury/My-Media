@@ -27,7 +27,16 @@
 
       <nav class="navbar">
         <a href="index.html" class="nav-item" style="--i: 0">Home</a>
-        <a href="Gallery/Gallery.html" class="nav-item" style="--i: 1">Gallery</a>
+        <div class="dropdown">
+          <a href="#" class="nav-item dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+              Gallery
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <li><a class="dropdown-item" href="../Gallery/Gallery.html">Gallery VRC</a></li>
+              <li><a class="dropdown-item" href="../GalleryFig/GalleryFig.html">Gallery Figurine</a></li>
+              <li><a class="dropdown-item" href="#">Marketing</a></li>
+          </ul>
+      </div>
         <a href="About Me/AboutMe.html" class="nav-item" style="--i: 2">About Me</a>
         <a href="HowTo/HowTo.html" class="nav-item" style="--i: 3">How To Find me</a>
       </nav>
