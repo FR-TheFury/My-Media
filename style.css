@@ -279,3 +279,36 @@ header {
     font-size: 0.9rem;
   }
 }
+
+.dropdown-menu {
+  background-color: rgba(0, 0, 0, 0.8);
+  border: none;
+}
+
+.dropdown-item {
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.dropdown-item:hover {
+  background-color: rgb(168, 239, 255, 0.2);
+  color: rgb(168, 239, 255, 0.9);
+}
+
+.dropdown-toggle::after {
+  content: '';
+  border: none;
+}
+
+.dropdown-menu.show {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.dropdown-menu {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
