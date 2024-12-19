@@ -1,0 +1,37 @@
+/* popup.css */
+
+#popup {
+    z-index: 1050; /* Ensure it appears above all other content */
+}
+
+#popup h1 {
+    font-size: 2rem;
+    color: #333;
+}
+
+#popup p {
+    font-size: 1.2rem;
+    color: #555;
+}
+
+#popup button {
+    font-size: 1rem;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#popup button.btn-success {
+    background-color: #28a745;
+    color: white;
+}
+
+#popup button.btn-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+#popup button:hover {
+    opacity: 0.9;
+}
