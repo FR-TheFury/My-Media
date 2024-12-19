@@ -1,39 +1,60 @@
 /* popup.css */
 
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.blurred {
+    filter: blur(10px);
+    pointer-events: none;
+}
+
 #popup {
-    z-index: 1050; /* Ensure it appears above all other content */
-    backdrop-filter: blur(20px); /* Blur effect for the background */
-    background: rgba(0, 0, 0, 0.8); /* Full opaque background */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#popup .popup-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
 }
 
 #popup h1 {
-    font-size: 2rem;
-    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
 }
 
 #popup p {
-    font-size: 1.2rem;
-    color: #555;
+    font-size: 16px;
+    margin-bottom: 20px;
 }
 
 #popup button {
-    font-size: 1rem;
+    margin: 0 10px;
     padding: 10px 20px;
+    font-size: 16px;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
 }
 
-#popup button.btn-success {
-    background-color: #28a745;
-    color: white;
+#popup .accept {
+    background-color: #4caf50;
+    color: #fff;
 }
 
-#popup button.btn-danger {
-    background-color: #dc3545;
-    color: white;
-}
-
-#popup button:hover {
-    opacity: 0.9;
+#popup .reject {
+    background-color: #f44336;
+    color: #fff;
 }
