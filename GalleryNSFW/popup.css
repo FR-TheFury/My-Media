@@ -2,6 +2,8 @@
 
 #popup {
     z-index: 1050; /* Ensure it appears above all other content */
+    backdrop-filter: blur(20px); /* Blur effect for the background */
+    background: rgba(0, 0, 0, 0.8); /* Full opaque background */
 }
 
 #popup h1 {
