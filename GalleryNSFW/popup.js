@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const rejectButton = document.getElementById("reject");
 
     // Ensure the body stays blurred until the popup is accepted
+    popup.style.display = "flex"; // Ensure the popup is visible initially
     document.body.style.filter = "blur(10px)"; // Apply blur to the entire body
     document.body.style.overflow = "hidden"; // Prevent scrolling
 
