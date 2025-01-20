@@ -96,12 +96,12 @@ header {
 }
 
 .card {
-    height: 400px;
+    height: 500px; /* Augmenté pour les écrans standards */
     overflow: hidden;
 }
 
 .card-image-wrapper {
-    height: 135%;
+    height: 150%; /* Ajusté pour les nouvelles dimensions */
     will-change: transform;
 }
 
@@ -300,4 +300,15 @@ header {
 .dropdown-menu {
     opacity: 0;
     transition: opacity 0.3s ease;
+}
+
+/* Media query spécifique pour les écrans 2K */
+@media (min-width: 2560px) {
+    .card {
+        height: 600px; /* Plus grand pour les écrans 2K */
+    }
+
+    .card-image-wrapper {
+        height: 160%; /* Ajusté pour correspondre */
+    }
 }
