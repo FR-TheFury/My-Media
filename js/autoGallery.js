@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     const galleries = [
-        { id: "galleryMain", folderId: "1OwartWamWeCqdsKpUy1D1B1VhisYsYLx" },
-        { id: "galleryFig", folderId: "15SG6-OX3sa4qV5PTevKl74hkpG3XOvo_" },
+        { id: "galleryMain", folderId: "15SG6-OX3sa4qV5PTevKl74hkpG3XOvo_" },
+        { id: "galleryFig", folderId: "1OwartWamWeCqdsKpUy1D1B1VhisYsYLx" },
         { id: "galleryPrint", folderId: "1hUe3DTeGVczB6iRXA0IT5Nmj57H370MH" }
     ];
 
