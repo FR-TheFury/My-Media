@@ -43,8 +43,13 @@ document.addEventListener("DOMContentLoaded", function () {
                         img.src = imgSrc;
                         img.alt = file.name;
                         img.loading = "lazy";
+
+                        // Empêche la boucle infinie en ne remplaçant l'image qu'une seule fois
                         img.onerror = function () {
-                            this.src = "https://via.placeholder.com/300"; 
+                            if (!this.dataset.error) {
+                                this.dataset.error = "true"; // Marque l'image comme déjà remplacée
+                                this.src = "fallback.jpg"; // Image de remplacement locale
+                            }
                         };
 
                         imageWrapper.appendChild(img);
