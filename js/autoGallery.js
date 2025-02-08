@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         img.onerror = function () {
                             if (!this.dataset.error) {
                                 this.dataset.error = "true"; // Marque l'image comme déjà remplacée
-                                this.src = "fallback.jpg"; // Image de remplacement locale
+                                this.src = "../img/fallback.png"; // Image de remplacement locale
                             }
                         };
 
