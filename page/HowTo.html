@@ -4,38 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="HowTo.css">
+    <link rel="stylesheet" href="../style.css">
     <link rel="icon" type="image/png" href="../img/TogaIcon.png">
     <title>How To Find Me !</title>
 </head>
 <body>
-    <header>
-        <a href="../index.html">
-          <img src="https://i.imgur.com/6tTdRC2.jpeg" alt="logo" class="logo"/>
-        </a>
-  
-        <input type="checkbox" id="check" />
-        <label for="check" class="icons">
-          <i class="bx bx-menu" id="menu-icon"></i>
-          <i class="bx bx-x" id="close-icon"></i>
-        </label>
 
-        <nav class="navbar">
-            <a href="../index.html" class="nav-item" style="--i: 0">Home</a>
-            <div class="dropdown">
-                <a href="#" class="nav-item dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                    Gallery
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <li><a class="dropdown-item" href="../Gallery/Gallery.html">Gallery VRC</a></li>
-                    <li><a class="dropdown-item" href="../GalleryFig/GalleryFig.html">Gallery Figurine</a></li>
-                    <li><a class="dropdown-item" href="../GalleryPrint/GalleryPrint.html">Gallery Print</a></li>
-                </ul>
-            </div>
-            <a href="../About Me/AboutMe.html" class="nav-item" style="--i: 2">About Me</a>
-            <a href="HowTo.html" class="nav-item" style="--i: 3">How To Find me</a>
-        </nav>
-    </header>
+    <!-- Inclusion du header -->
+  <div data-include="../header.html"></div>
+
 </br>
     <div class="container">
         <!-- Section contacts -->
@@ -83,10 +60,10 @@
 
     </div>
   
-    <!-- Footer -->
-    <div class="footer">
-      <p>© 2024 Himely_Puppy - All rights reserved</p>
-    </div>
+        <!-- Inclusion du footer -->
+    <div data-include="../footer.html"></div>
+
+    <script src="../js/include.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
