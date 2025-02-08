@@ -7,14 +7,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const API_KEY = "AIzaSyB5WsFxRU6G95rjFliPZM0suaRTfrCu0xI";
 
-    function fetchImages(galleryId, folderId) {
-        const url = `https://www.googleapis.com/drive/v3/files?q='${folderId}'+in+parents&key=${API_KEY}&fields=files(id,name,mimeType)&corpora=user&supportsAllDrives=true`;
+    function fetchImages(galleryId, folderId, nextPageToken = "") {
+        let url = `https://www.googleapis.com/drive/v3/files?q='${folderId}'+in+parents`
+            + `&key=${API_KEY}&fields=nextPageToken,files(id,name,mimeType)`
+            + `&corpora=user&supportsAllDrives=true&pageSize=50`;
+
+        if (nextPageToken) url += `&pageToken=${nextPageToken}`;
 
         fetch(url)
             .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
+                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
                 return response.json();
             })
             .then(data => {
@@ -31,30 +33,35 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 data.files.forEach(file => {
                     if (file.mimeType.startsWith("image/")) {
-                        const imgSrc = `https://lh3.googleusercontent.com/d/${file.id}=s800`;
-                    
+                        const imgSrc = `https://drive.google.com/uc?id=${file.id}`;
+
                         const card = document.createElement("div");
                         card.classList.add("card");
-                    
+
                         const imageWrapper = document.createElement("div");
                         imageWrapper.classList.add("card-image-wrapper");
-                    
+
                         const img = document.createElement("img");
                         img.src = imgSrc;
                         img.alt = file.name;
-                    
+                        img.loading = "lazy";
+
                         img.onerror = function () {
                             this.src = "/My-Media/assets/images/fallback.jpg"; // Image de secours
                         };
-                    
+
                         imageWrapper.appendChild(img);
                         card.appendChild(imageWrapper);
                         galleryContainer.appendChild(card);
                     } else {
                         console.warn(`Le fichier ${file.name} n'est pas une image.`);
                     }
-                    
                 });
+
+                // Si Google Drive a plus d'images, continuer à paginer
+                if (data.nextPageToken) {
+                    fetchImages(galleryId, folderId, data.nextPageToken);
+                }
             })
             .catch(error => console.error(`Erreur lors du chargement des images pour ${galleryId}:`, error));
     }
