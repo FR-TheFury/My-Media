@@ -347,14 +347,14 @@ p {
 
 /* Footer */
 .footer {
+  position: sticky;
+  bottom: 0;
+  width: 100%;
   background-color: #e74c3c;
   color: white;
   text-align: center;
   padding: 10px 0;
-  margin-top: 20px;
-  position: sticky;
-  bottom: 0;
-  width: 100%;
+  margin-top: auto;
 }
 
 .dropdown-menu {
