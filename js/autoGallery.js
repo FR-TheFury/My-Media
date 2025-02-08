@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ];
 
     const API_KEY = "AIzaSyB5WsFxRU6G95rjFliPZM0suaRTfrCu0xI";
+    const FALLBACK_IMAGE = "/My-Media/img/fallback.png"; // Image de secours
 
     function fetchImages(galleryId, folderId, nextPageToken = "") {
         let url = `https://www.googleapis.com/drive/v3/files?q='${folderId}'+in+parents`
@@ -21,19 +22,19 @@ document.addEventListener("DOMContentLoaded", function () {
             })
             .then(data => {
                 if (!data.files || data.files.length === 0) {
-                    console.warn(`Aucune image trouvée dans ${galleryId}`);
+                    console.warn(`⚠️ Aucune image trouvée dans ${galleryId}`);
                     return;
                 }
 
                 const galleryContainer = document.getElementById(galleryId);
                 if (!galleryContainer) {
-                    console.error(`Élément avec l'ID '${galleryId}' introuvable.`);
+                    console.error(`❌ Élément avec l'ID '${galleryId}' introuvable.`);
                     return;
                 }
 
                 data.files.forEach(file => {
                     if (file.mimeType.startsWith("image/")) {
-                        const imgSrc = `https://drive.google.com/uc?id=${file.id}`;
+                        const imgSrc = `https://drive.google.com/thumbnail?id=${file.id}&sz=w1000`;
 
                         const card = document.createElement("div");
                         card.classList.add("card");
@@ -44,17 +45,17 @@ document.addEventListener("DOMContentLoaded", function () {
                         const img = document.createElement("img");
                         img.src = imgSrc;
                         img.alt = file.name;
-                        img.loading = "lazy";
+                        img.loading = "lazy"; // Optimisation pour le chargement
 
                         img.onerror = function () {
-                            this.src = "/My-Media/img/fallback.png"; // Image de secours
+                            this.src = FALLBACK_IMAGE; // Image de secours en cas d'erreur
                         };
 
                         imageWrapper.appendChild(img);
                         card.appendChild(imageWrapper);
                         galleryContainer.appendChild(card);
                     } else {
-                        console.warn(`Le fichier ${file.name} n'est pas une image.`);
+                        console.warn(`📁 Le fichier '${file.name}' n'est pas une image.`);
                     }
                 });
 
@@ -63,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     fetchImages(galleryId, folderId, data.nextPageToken);
                 }
             })
-            .catch(error => console.error(`Erreur lors du chargement des images pour ${galleryId}:`, error));
+            .catch(error => console.error(`❌ Erreur lors du chargement des images pour ${galleryId}:`, error));
     }
 
     galleries.forEach(gallery => fetchImages(gallery.id, gallery.folderId));
