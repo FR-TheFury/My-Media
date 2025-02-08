@@ -1,4 +1,4 @@
-/* ==============================
+    /* ==============================
    GLOBAL STYLES
    ============================== */
    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
@@ -144,7 +144,7 @@
    }
    
    /* ==============================
-      MEDIA QUERIES
+      RESPONSIVE MEDIA QUERIES
       ============================== */
    @media (max-width: 900px) {
      header {
@@ -165,6 +165,15 @@
    @media (max-width: 550px) {
      .gallery-track {
        grid-template-columns: repeat(1, 1fr);
+     }
+   }
+   
+   @media (min-width: 2560px) {
+     .card {
+       height: 600px;
+     }
+     .card-image-wrapper {
+       height: 160%;
      }
    }
    
