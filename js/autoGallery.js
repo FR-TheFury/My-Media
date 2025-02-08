@@ -31,31 +31,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 data.files.forEach(file => {
                     if (file.mimeType.startsWith("image/")) {
-                        const imgSrc = `https://drive.google.com/uc?export=view&id=${file.id}`;
-
+                        const imgSrc = `https://lh3.googleusercontent.com/d/${file.id}=s800`;
+                    
                         const card = document.createElement("div");
                         card.classList.add("card");
-
+                    
                         const imageWrapper = document.createElement("div");
                         imageWrapper.classList.add("card-image-wrapper");
-
+                    
                         const img = document.createElement("img");
                         img.src = imgSrc;
                         img.alt = file.name;
-                        img.loading = "lazy";
-
-                        // Empêche la boucle infinie en ne remplaçant l'image qu'une seule fois
+                    
                         img.onerror = function () {
-                            if (!this.dataset.error) {
-                                this.dataset.error = "true"; // Marque l'image comme déjà remplacée
-                                this.src = "../img/fallback.png"; // Image de remplacement locale
-                            }
+                            this.src = "/My-Media/assets/images/fallback.jpg"; // Image de secours
                         };
-
+                    
                         imageWrapper.appendChild(img);
                         card.appendChild(imageWrapper);
                         galleryContainer.appendChild(card);
+                    } else {
+                        console.warn(`Le fichier ${file.name} n'est pas une image.`);
                     }
+                    
                 });
             })
             .catch(error => console.error(`Erreur lors du chargement des images pour ${galleryId}:`, error));
