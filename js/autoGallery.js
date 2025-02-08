@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         img.loading = "lazy";
 
                         img.onerror = function () {
-                            this.src = "/My-Media/assets/images/fallback.png"; // Image de secours
+                            this.src = "/My-Media/img/fallback.png"; // Image de secours
                         };
 
                         imageWrapper.appendChild(img);
