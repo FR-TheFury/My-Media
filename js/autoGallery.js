@@ -1,20 +1,33 @@
 document.addEventListener("DOMContentLoaded", function () {
     const galleries = [
-        { id: "galleryMain", folderId: "1OwartWamWeCqdsKpUy1D1B1VhisYsYLx" }, // ID de GalleryMain
-        { id: "galleryFig", folderId: "15SG6-OX3sa4qV5PTevKl74hkpG3XOvo_" }, // ID de GalleryFig
-        { id: "galleryPrint", folderId: "1hUe3DTeGVczB6iRXA0IT5Nmj57H370MH" }  // ID de GalleryPrint
+        { id: "galleryMain", folderId: "1OwartWamWeCqdsKpUy1D1B1VhisYsYLx" },
+        { id: "galleryFig", folderId: "15SG6-OX3sa4qV5PTevKl74hkpG3XOvo_" },
+        { id: "galleryPrint", folderId: "1hUe3DTeGVczB6iRXA0IT5Nmj57H370MH" }
     ];
 
-    const API_KEY = "AIzaSyB5WsFxRU6G95rjFliPZM0suaRTfrCu0xI"; // Remplace avec ta clé API
+    const API_KEY = "AIzaSyB5WsFxRU6G95rjFliPZM0suaRTfrCu0xI";
 
     function fetchImages(galleryId, folderId) {
-        const url = `https://www.googleapis.com/drive/v3/files?q='${folderId}'+in+parents&key=${API_KEY}&fields=files(id,name,mimeType)`;
+        const url = `https://www.googleapis.com/drive/v3/files?q='${folderId}'+in+parents&key=${API_KEY}&fields=files(id,name,mimeType)&corpora=user&supportsAllDrives=true`;
 
         fetch(url)
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
             .then(data => {
-                if (!data.files) return;
+                if (!data.files || data.files.length === 0) {
+                    console.warn(`Aucune image trouvée dans ${galleryId}`);
+                    return;
+                }
+
                 const galleryContainer = document.getElementById(galleryId);
+                if (!galleryContainer) {
+                    console.error(`Élément avec l'ID '${galleryId}' introuvable.`);
+                    return;
+                }
 
                 data.files.forEach(file => {
                     if (file.mimeType.startsWith("image/")) {
@@ -29,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         const img = document.createElement("img");
                         img.src = imgSrc;
                         img.alt = file.name;
+                        img.loading = "lazy";
                         img.onerror = function () {
                             this.src = "https://via.placeholder.com/300"; 
                         };
@@ -39,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
                 });
             })
-            .catch(error => console.error("Erreur lors du chargement des images :", error));
+            .catch(error => console.error(`Erreur lors du chargement des images pour ${galleryId}:`, error));
     }
 
     galleries.forEach(gallery => fetchImages(gallery.id, gallery.folderId));
