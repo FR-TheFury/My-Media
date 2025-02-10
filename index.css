@@ -120,7 +120,7 @@ header {
 }
 
 .light::after {
-  content: "Explore";
+  content: "Find Me";
   position: absolute;
   width: 170px;
   height: 40px;
