@@ -351,3 +351,94 @@ p {
   opacity: 0;
   transition: opacity 0.3s ease;
 }
+
+
+
+/* Uniformisation des boutons */
+.container .btn {
+  font-size: 18px;
+  font-weight: bold;
+  padding: 12px 30px;
+  border: 3px solid transparent;
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  width: 180px; /* Taille uniforme */
+  text-align: center;
+}
+
+/* Twitch Button */
+.btn-primary {
+  background: linear-gradient(45deg, #6441a5, #9b5de5);
+  color: white;
+  border-color: #fff;
+}
+
+/* TikTok Button */
+.btn-danger {
+  background: linear-gradient(45deg, #ff0050, #ff8c00);
+  color: white;
+  border-color: #fff;
+}
+
+/* Instagram Button */
+.btn-warning {
+  background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+  color: white;
+  border-color: #fff;
+}
+
+/* Effet Neon Glow */
+.container .btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+}
+
+/* Animation Glitch au survol */
+.container .btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  filter: blur(2px);
+  opacity: 0.8;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.container .btn:hover::before {
+  transform: translateX(100%);
+}
+
+/* Animation Pulsation après le clic */
+.container .btn:active {
+  animation: pulse 0.2s ease-in-out;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1.2); }
+  50% { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+
+/* Effet de scan lumineux */
+.container .btn::after {
+  content: "";
+  position: absolute;
+  top: -150%;
+  left: -150%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 10%, transparent 70%);
+  transition: transform 0.4s ease-in-out;
+}
+
+.container .btn:hover::after {
+  transform: translate(100%, 100%);
+}
