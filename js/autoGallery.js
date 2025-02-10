@@ -2,7 +2,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const galleries = [
         { id: "galleryMain", folderId: "15SG6-OX3sa4qV5PTevKl74hkpG3XOvo_" },
         { id: "galleryFig", folderId: "1OwartWamWeCqdsKpUy1D1B1VhisYsYLx" },
-        { id: "galleryPrint", folderId: "1hUe3DTeGVczB6iRXA0IT5Nmj57H370MH" }
+        { id: "galleryPrint", folderId: "1hUe3DTeGVczB6iRXA0IT5Nmj57H370MH" },
+        { id: "galleryGif", folderId: "1ON0h93n--3cGcCG7LzIZO99QXJnBPelB" } // Nouvelle galerie GIF
     ];
 
     const API_KEY = "AIzaSyB5WsFxRU6G95rjFliPZM0suaRTfrCu0xI";
@@ -33,30 +34,31 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
 
                 data.files.forEach(file => {
-                    if (file.mimeType.startsWith("image/")) {
-                        const imgSrc = `https://drive.google.com/thumbnail?id=${file.id}&sz=w1000`;
-
-                        const card = document.createElement("div");
-                        card.classList.add("card");
-
-                        const imageWrapper = document.createElement("div");
-                        imageWrapper.classList.add("card-image-wrapper");
-
-                        const img = document.createElement("img");
-                        img.src = imgSrc;
-                        img.alt = file.name;
-                        img.loading = "lazy"; // Optimisation pour le chargement
-
-                        img.onerror = function () {
-                            this.src = FALLBACK_IMAGE; // Image de secours en cas d'erreur
-                        };
-
-                        imageWrapper.appendChild(img);
-                        card.appendChild(imageWrapper);
-                        galleryContainer.appendChild(card);
-                    } else {
-                        console.warn(`📁 Le fichier '${file.name}' n'est pas une image.`);
+                    if (galleryId === "galleryGif" && !file.mimeType.includes("gif")) {
+                        console.warn(`🚨 Ignoré : ${file.name} car ce n'est pas un GIF.`);
+                        return;
                     }
+
+                    const imgSrc = `https://drive.google.com/thumbnail?id=${file.id}&sz=w1000`;
+
+                    const card = document.createElement("div");
+                    card.classList.add("card");
+
+                    const imageWrapper = document.createElement("div");
+                    imageWrapper.classList.add("card-image-wrapper");
+
+                    const img = document.createElement("img");
+                    img.src = imgSrc;
+                    img.alt = file.name;
+                    img.loading = "lazy";
+
+                    img.onerror = function () {
+                        this.src = FALLBACK_IMAGE; // Image de secours
+                    };
+
+                    imageWrapper.appendChild(img);
+                    card.appendChild(imageWrapper);
+                    galleryContainer.appendChild(card);
                 });
 
                 // Si Google Drive a plus d'images, continuer à paginer
