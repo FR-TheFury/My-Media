@@ -20,3 +20,11 @@ function adjustRelativeLinks() {
 }
 
 document.addEventListener("DOMContentLoaded", includeHTML);
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Charger le player de musique après le header
+    const script = document.createElement("script");
+    script.src = "../js/musicPlayer.js";
+    script.defer = true;
+    document.body.appendChild(script);
+});

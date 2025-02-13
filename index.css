@@ -323,3 +323,34 @@ header {
     padding: 10px 0;
     margin-top: auto;
 }
+
+/* MUSIC PLAYER */
+
+#music-player {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 8px 15px;
+  border-radius: 20px;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#music-player button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#music-volume {
+  width: 80px;
+  cursor: pointer;
+}
