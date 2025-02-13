@@ -9,17 +9,9 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
-    // 🔹 Charger l'état de la musique depuis sessionStorage
-    if (sessionStorage.getItem("musicPlaying") === "true") {
-        audio.play().catch(error => console.warn("🔇 Impossible de démarrer la musique automatiquement", error));
-        playButton.style.display = "none";
-        pauseButton.style.display = "inline-block";
-    }
-
-    // 🔹 Démarrer la musique
+    // 🔹 Jouer la musique
     playButton.addEventListener("click", function () {
         audio.play().then(() => {
-            sessionStorage.setItem("musicPlaying", "true");
             playButton.style.display = "none";
             pauseButton.style.display = "inline-block";
         }).catch(error => {
@@ -28,23 +20,15 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // 🔹 Mettre en pause la musique
+    // 🔹 Mettre en pause
     pauseButton.addEventListener("click", function () {
         audio.pause();
-        sessionStorage.setItem("musicPlaying", "false");
         playButton.style.display = "inline-block";
         pauseButton.style.display = "none";
     });
 
-    // 🔹 Ajuster le volume
+    // 🔹 Modifier le volume
     volumeSlider.addEventListener("input", function () {
         audio.volume = this.value;
-        sessionStorage.setItem("musicVolume", this.value);
     });
-
-    // Appliquer le volume enregistré
-    if (sessionStorage.getItem("musicVolume")) {
-        audio.volume = parseFloat(sessionStorage.getItem("musicVolume"));
-        volumeSlider.value = audio.volume;
-    }
 });
