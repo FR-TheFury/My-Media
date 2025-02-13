@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const audio = new Audio("../music/background.mp3"); // Mets ici le bon chemin de ton fichier audio
+    const audio = new Audio("/music/background.mp3"); // Vérifie bien ce chemin !
     audio.loop = true; // Lecture en boucle
-    audio.volume = localStorage.getItem("musicVolume") ? parseFloat(localStorage.getItem("musicVolume")) : 0.5; // Récupérer le volume
+    audio.volume = localStorage.getItem("musicVolume") ? parseFloat(localStorage.getItem("musicVolume")) : 0.5;
     let isPlaying = localStorage.getItem("musicPlaying") === "true";
 
     const button = document.getElementById("toggle-music");
@@ -11,9 +11,19 @@ document.addEventListener("DOMContentLoaded", function () {
     // Appliquer le volume initial
     volumeSlider.value = audio.volume;
 
-    // Jouer la musique si elle était activée précédemment
+    // ⚠️ Autoriser la lecture après un clic utilisateur
+    document.body.addEventListener("click", function () {
+        if (!isPlaying) {
+            audio.play().catch(error => console.warn("🔇 Lecture automatique bloquée", error));
+            isPlaying = true;
+            localStorage.setItem("musicPlaying", "true");
+            statusText.textContent = "Pause";
+        }
+    }, { once: true });
+
+    // Jouer la musique si elle était activée avant
     if (isPlaying) {
-        audio.play();
+        audio.play().catch(error => console.warn("🔇 Lecture automatique bloquée", error));
         statusText.textContent = "Pause";
     }
 
