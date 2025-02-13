@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const audio = new Audio("/My-Media/music/background.mp3"); // Mets ici le bon chemin de ton fichier audio
+    const audio = new Audio("../music/background.mp3"); // Mets ici le bon chemin de ton fichier audio
     audio.loop = true; // Lecture en boucle
     audio.volume = localStorage.getItem("musicVolume") ? parseFloat(localStorage.getItem("musicVolume")) : 0.5; // Récupérer le volume
     let isPlaying = localStorage.getItem("musicPlaying") === "true";
