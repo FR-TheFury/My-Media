@@ -1,34 +1,37 @@
 document.addEventListener("DOMContentLoaded", function () {
     const audio = document.getElementById("bg-music");
-    const playButton = document.getElementById("play-music");
-    const pauseButton = document.getElementById("pause-music");
-    const volumeSlider = document.getElementById("music-volume");
+    const musicToggle = document.getElementById("music-toggle");
+    const volumeSlider = document.getElementById("volume-slider");
 
-    if (!audio || !playButton || !pauseButton || !volumeSlider) {
-        console.error("❌ Un ou plusieurs éléments du lecteur audio sont introuvables !");
+    if (!audio || !musicToggle || !volumeSlider) {
+        console.error("❌ Problème : Éléments du lecteur audio introuvables !");
         return;
     }
 
-    // 🔹 Jouer la musique
-    playButton.addEventListener("click", function () {
-        audio.play().then(() => {
-            playButton.style.display = "none";
-            pauseButton.style.display = "inline-block";
-        }).catch(error => {
-            console.error("🔇 Erreur lors du démarrage de la musique : ", error);
-            alert("⚠️ Impossible de jouer la musique automatiquement ! Cliquez directement sur le bouton Play.");
+    // 🔹 Initialisation du volume
+    audio.volume = 0.5;
+
+    // 🔹 Essayer de jouer automatiquement la musique
+    function playMusic() {
+        audio.play().catch(error => {
+            console.warn("⚠️ L'auto-play a été bloqué par le navigateur. Nécessite une interaction utilisateur.");
         });
+    }
+    playMusic();
+
+    // 🔹 Bouton Play/Pause
+    musicToggle.addEventListener("click", function () {
+        if (audio.paused) {
+            audio.play();
+            musicToggle.textContent = "🔊"; // Icône haut-parleur actif
+        } else {
+            audio.pause();
+            musicToggle.textContent = "🔇"; // Icône haut-parleur coupé
+        }
     });
 
-    // 🔹 Mettre en pause
-    pauseButton.addEventListener("click", function () {
-        audio.pause();
-        playButton.style.display = "inline-block";
-        pauseButton.style.display = "none";
-    });
-
-    // 🔹 Modifier le volume
+    // 🔹 Changement du volume via le slider
     volumeSlider.addEventListener("input", function () {
-        audio.volume = this.value;
+        audio.volume = volumeSlider.value;
     });
 });
