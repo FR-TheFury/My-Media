@@ -4,6 +4,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const pauseButton = document.getElementById("pause-music");
     const volumeSlider = document.getElementById("music-volume");
 
+    if (!audio || !playButton || !pauseButton || !volumeSlider) {
+        console.error("❌ Un ou plusieurs éléments du lecteur audio sont introuvables !");
+        return;
+    }
+
     // 🔹 Charger l'état de la musique depuis sessionStorage
     if (sessionStorage.getItem("musicPlaying") === "true") {
         audio.play().catch(error => console.warn("🔇 Impossible de démarrer la musique automatiquement", error));
