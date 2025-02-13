@@ -10,6 +10,14 @@ function includeHTML() {
     });
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+    // Charger le player de musique après le header
+    const script = document.createElement("script");
+    script.src = "/js/musicPlayer.js";
+    script.defer = true;
+    document.body.appendChild(script);
+});
+
 function adjustRelativeLinks() {
     document.querySelectorAll("a.nav-item, .dropdown-item").forEach(link => {
         let basePath = "/My-Media/"; // Assurez-vous que c'est le bon chemin racine
@@ -20,11 +28,3 @@ function adjustRelativeLinks() {
 }
 
 document.addEventListener("DOMContentLoaded", includeHTML);
-
-document.addEventListener("DOMContentLoaded", function () {
-    // Charger le player de musique après le header
-    const script = document.createElement("script");
-    script.src = "../js/musicPlayer.js";
-    script.defer = true;
-    document.body.appendChild(script);
-});
