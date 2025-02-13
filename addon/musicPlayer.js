@@ -1,21 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
-    let audio = new Audio("https://www.himely-puppy.ovh/music/background.mp3");
-    audio.loop = true; // Musique en boucle
-
-    // Récupération des éléments HTML
+    const audio = document.getElementById("bg-music");
     const playButton = document.getElementById("play-music");
     const pauseButton = document.getElementById("pause-music");
     const volumeSlider = document.getElementById("music-volume");
 
-    // Vérifier si la musique était en cours avant un changement de page
+    // Récupérer l'état de la musique après changement de page
     if (sessionStorage.getItem("musicPlaying") === "true") {
-        audio.play().then(() => {
-            playButton.style.display = "none";
-            pauseButton.style.display = "inline-block";
-        }).catch(error => console.warn("🔇 Impossible de démarrer la musique automatiquement", error));
+        audio.play().catch(error => console.warn("🔇 Impossible de démarrer la musique automatiquement", error));
+        playButton.style.display = "none";
+        pauseButton.style.display = "inline-block";
     }
 
-    // 🔹 Démarrer la musique quand on clique sur Play
+    // 🔹 Démarrer la musique
     playButton.addEventListener("click", function () {
         audio.play().then(() => {
             sessionStorage.setItem("musicPlaying", "true");
@@ -46,9 +42,4 @@ document.addEventListener("DOMContentLoaded", function () {
         audio.volume = parseFloat(sessionStorage.getItem("musicVolume"));
         volumeSlider.value = audio.volume;
     }
-
-    // 🔹 Empêcher la musique de s'arrêter entre les pages
-    window.addEventListener("beforeunload", function () {
-        sessionStorage.setItem("musicPlaying", !audio.paused);
-    });
 });
