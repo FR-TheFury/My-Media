@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const pauseButton = document.getElementById("pause-music");
     const volumeSlider = document.getElementById("music-volume");
 
-    // Charger l'état de la musique si l'utilisateur a déjà joué la musique
+    // 🔹 Charger l'état de la musique depuis sessionStorage
     if (sessionStorage.getItem("musicPlaying") === "true") {
         audio.play().catch(error => console.warn("🔇 Impossible de démarrer la musique automatiquement", error));
         playButton.style.display = "none";
