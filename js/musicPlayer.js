@@ -8,16 +8,26 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
-    // 🔹 Initialisation du volume
+    // 🔹 Initialisation du volume (muet pour contourner le blocage)
     audio.volume = 0.5;
+    audio.muted = true; // Commencer muet pour éviter le blocage
 
     // 🔹 Essayer de jouer automatiquement la musique
     function playMusic() {
-        audio.play().catch(error => {
-            console.warn("⚠️ L'auto-play a été bloqué par le navigateur. Nécessite une interaction utilisateur.");
+        audio.play().then(() => {
+            console.log("✅ Musique démarrée automatiquement !");
+        }).catch(error => {
+            console.warn("⚠️ L'auto-play a été bloqué. Nécessite une interaction utilisateur.");
         });
     }
     playMusic();
+
+    // 🔹 Quand l'utilisateur clique n'importe où, activer le son et jouer
+    document.addEventListener("click", function enableSound() {
+        audio.muted = false; // Activer le son après interaction
+        audio.play().catch(error => console.error("❌ Erreur de lecture :", error));
+        document.removeEventListener("click", enableSound); // Supprimer après activation
+    });
 
     // 🔹 Bouton Play/Pause
     musicToggle.addEventListener("click", function () {
