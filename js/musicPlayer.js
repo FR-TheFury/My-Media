@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const audio = new Audio("https://www.himely-puppy.ovh/music/background.mp3");
+    let audio = new Audio("https://www.himely-puppy.ovh/music/background.mp3");
     audio.loop = true; // Musique en boucle
 
     // Récupération des éléments HTML
@@ -7,31 +7,30 @@ document.addEventListener("DOMContentLoaded", function () {
     const pauseButton = document.getElementById("pause-music");
     const volumeSlider = document.getElementById("music-volume");
 
-    // Charger le volume depuis le localStorage
-    audio.volume = localStorage.getItem("musicVolume") ? parseFloat(localStorage.getItem("musicVolume")) : 0.5;
-    volumeSlider.value = audio.volume;
-
-    // Vérifier si la musique doit reprendre après un changement de page
-    if (localStorage.getItem("musicPlaying") === "true") {
+    // Vérifier si la musique était en cours avant un changement de page
+    if (sessionStorage.getItem("musicPlaying") === "true") {
         audio.play().then(() => {
             playButton.style.display = "none";
             pauseButton.style.display = "inline-block";
-        }).catch(error => console.warn("🔇 Impossible de démarrer la musique", error));
+        }).catch(error => console.warn("🔇 Impossible de démarrer la musique automatiquement", error));
     }
 
-    // 🔹 Démarrer la musique
+    // 🔹 Démarrer la musique quand on clique sur Play
     playButton.addEventListener("click", function () {
         audio.play().then(() => {
-            localStorage.setItem("musicPlaying", "true");
+            sessionStorage.setItem("musicPlaying", "true");
             playButton.style.display = "none";
             pauseButton.style.display = "inline-block";
-        }).catch(error => console.warn("🔇 Erreur lors du démarrage", error));
+        }).catch(error => {
+            console.error("🔇 Erreur lors du démarrage de la musique : ", error);
+            alert("⚠️ Impossible de jouer la musique automatiquement ! Cliquez directement sur le bouton Play.");
+        });
     });
 
     // 🔹 Mettre en pause la musique
     pauseButton.addEventListener("click", function () {
         audio.pause();
-        localStorage.setItem("musicPlaying", "false");
+        sessionStorage.setItem("musicPlaying", "false");
         playButton.style.display = "inline-block";
         pauseButton.style.display = "none";
     });
@@ -39,11 +38,17 @@ document.addEventListener("DOMContentLoaded", function () {
     // 🔹 Ajuster le volume
     volumeSlider.addEventListener("input", function () {
         audio.volume = this.value;
-        localStorage.setItem("musicVolume", this.value);
+        sessionStorage.setItem("musicVolume", this.value);
     });
 
-    // 🔹 Sauvegarder l'état avant de quitter la page
+    // Appliquer le volume enregistré
+    if (sessionStorage.getItem("musicVolume")) {
+        audio.volume = parseFloat(sessionStorage.getItem("musicVolume"));
+        volumeSlider.value = audio.volume;
+    }
+
+    // 🔹 Empêcher la musique de s'arrêter entre les pages
     window.addEventListener("beforeunload", function () {
-        localStorage.setItem("musicPlaying", !audio.paused);
+        sessionStorage.setItem("musicPlaying", !audio.paused);
     });
 });
