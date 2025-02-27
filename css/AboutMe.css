@@ -462,10 +462,10 @@ p {
 
   /* ✅ Ajustement du menu burger pour qu'il soit bien visible */
   .icons {
-    display: block;
+    display: flex;
     position: absolute;
     top: 15px;
-    right: 5%; /* Ajustement pour éviter qu'il sorte de l'écran */
+    right: 15px; /* ✅ Ajustement pour ne pas qu'il sorte de l'écran */
     font-size: 2.5rem;
     cursor: pointer;
     z-index: 1002;
@@ -477,13 +477,31 @@ p {
     top: 0;
     left: 0;
     width: 100%;
-    height: 60px; /* Ajustement de la hauteur */
+    height: 60px;
     background: rgba(0, 0, 0, 0.9);
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 15px;
     z-index: 1001;
+  }
+
+  #menu-icon {
+    display: block;
+    color: white;
+  }
+
+  #close-icon {
+    display: none;
+    color: white;
+  }
+
+  #check:checked ~ .icons #menu-icon {
+    display: none;
+  }
+
+  #check:checked ~ .icons #close-icon {
+    display: block;
   }
 
   #check:checked ~ .navbar {
