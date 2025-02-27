@@ -6,10 +6,19 @@
   padding: 0;
 }
 
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
 body {
   font-family: "Poppins", sans-serif;
   background: linear-gradient(rgba(12, 3, 51, 0.3), rgba(12, 3, 51, 0.3));
   min-height: 100vh;
+  overflow-x: hidden; /* Empêche le scroll horizontal */
 }
 
 header {
@@ -21,11 +30,19 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 5;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.6); /* Pour éviter la superposition avec la vidéo */
 }
 
+/* ✅ Correction du logo */
 .logo {
-  width: 40px;
+  width: 50px;
+  height: auto;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1001;
+  display: block;
 }
 
 .nav-item {
@@ -78,7 +95,7 @@ header {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  flex: 1; /* Permet de s'adapter à l'écran */
 }
 
 .content h1 {
@@ -87,6 +104,18 @@ header {
   -webkit-text-stroke: 2px rgb(168, 239, 255, 1);
   color: transparent;
   transition: all 0.5s ease;
+}
+
+/* ✅ Centrage et ajustement de la vidéo */
+.background-video {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  transform: translate(-50%, -50%);
+  z-index: -1;
 }
 
 .btn {
@@ -110,8 +139,8 @@ header {
   content: "";
   position: absolute;
   background-image: conic-gradient(
-    rgb(168, 239, 255, 1) 20deg,
-    transparent 150deg
+          rgb(168, 239, 255, 1) 20deg,
+          transparent 150deg
   );
   width: 400%;
   height: 400%;
@@ -135,257 +164,16 @@ header {
   border-radius: 5px;
 }
 
-@keyframes rotate {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-.background-video {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
-}
-
-@media (min-aspect-ratio: 16/9) {
-  .background-video {
-    width: 100%;
-    height: auto;
-  }
-}
-
-@media (max-aspect-ratio: 4/3) {
-  .background-video {
-    width: auto;
-    height: 100%;
-  }
-}
-
-@media (max-width: 900px) {
-  header {
-    padding: 1.3rem 5%;
-  }
-
-  .content h1 {
-    font-size: 7rem;
-  }
-}
-
-@media (max-width: 700px) {
-  header::before {
-    content: "";
-    top: 0;
-    left: 0;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(50px);
-    z-index: -1;
-  }
-
-  header::after {
-    content: "";
-    top: 0;
-    left: -100%;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.4),
-      transparent
-    );
-    transition: 0.8s;
-  }
-
-  .icons {
-    display: inline-flex;
-  }
-
-  #check:checked ~ .icons #menu-icon {
-    display: none;
-  }
-
-  .icons #close-icon {
-    display: none;
-  }
-
-  #check:checked ~ .icons #close-icon {
-    display: block;
-  }
-
-  .navbar {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    height: 0;
-    background: rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(50px);
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: all 0.3s ease;
-  }
-
-  #check:checked ~ .navbar {
-    height: 17.7rem;
-  }
-
-  .nav-item {
-    display: block;
-    font-size: 1.1rem;
-    margin: 2rem 0;
-    text-align: center;
-    transform: translateY(-50px);
-    opacity: 0;
-    transition: all 0.3s ease;
-  }
-
-  .nav-item:hover::after {
-    width: auto;
-  }
-
-  #check:checked ~ .navbar a {
-    transform: translateY(0);
-    opacity: 1;
-    transition-delay: calc(0.15s * var(--i));
-  }
-}
-
-@media (max-width: 620px) {
-  .content h1 {
-    font-size: 5rem;
-  }
-}
-
-@media (max-width: 450px) {
-  .content h1 {
-    font-size: 3rem;
-  }
-
-  .btn {
-    width: 130px;
-  }
-
-  .light::after {
-    width: 120px;
-    font-size: 0.9rem;
-  }
-}
-
-.dropdown-menu {
-  background-color: rgba(0, 0, 0, 0.8);
-  border: none;
-}
-
-.dropdown-item {
-  color: #fff;
-  font-size: 1rem;
-  font-weight: 500;
-  padding: 0.5rem 1rem;
-  transition: all 0.3s ease;
-}
-
-.dropdown-item:hover {
-  background-color: rgb(168, 239, 255, 0.2);
-  color: rgb(168, 239, 255, 0.9);
-}
-
-.dropdown-toggle::after {
-  content: '';
-  border: none;
-}
-
-.dropdown-menu.show {
-  opacity: 1;
-  transition: opacity 0.3s ease;
-}
-
-.dropdown-menu {
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
+/* ✅ Correction du footer */
 .footer {
-    position: sticky;
-    bottom: 0;
-    width: 100%;
-    background-color: #e74c3c;
-    color: white;
-    text-align: center;
-    padding: 10px 0;
-    margin-top: auto;
-}
-
-
-/*MUSIC PLAYER*/
-
-/* Conteneur du player */
-#music-controller {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
-  z-index: 1000;
-}
-
-/* Style du bouton musique */
-.music-button {
-  width: 50px;
-  height: 50px;
-  background-color: rgba(0, 0, 0, 0.7);
+  bottom: 0;
+  width: 100%;
+  background-color: #e74c3c;
   color: white;
-  border: none;
-  border-radius: 50%;
-  font-size: 20px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: background 0.3s ease;
-}
-
-.music-button:hover {
-  background-color: rgba(255, 255, 255, 0.5);
-  color: black;
-}
-
-/* Slider volume */
-#volume-slider {
-  width: 50px;
-  appearance: none;
-  background: rgba(255, 255, 255, 0.7);
-  height: 4px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-#volume-slider::-webkit-slider-thumb {
-  appearance: none;
-  width: 10px;
-  height: 10px;
-  background: white;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-#volume-slider::-moz-range-thumb {
-  width: 10px;
-  height: 10px;
-  background: white;
-  border-radius: 50%;
-  cursor: pointer;
+  text-align: center;
+  padding: 10px 0;
+  z-index: 1000;
 }
 
 /* ======================= */
@@ -407,8 +195,8 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start; /* Ajustement */
-    padding-top: 60px; /* Ajout pour éviter l'effet collé */
+    justify-content: flex-start;
+    padding-top: 60px;
   }
 
   #check:checked ~ .navbar {
@@ -442,13 +230,10 @@ header {
     z-index: 1001;
   }
 
-  /* ======================= */
   /* ✅ FIX MENU DÉROULANT "GALLERY" */
-  /* ======================= */
-
   .dropdown-menu {
-    display: none; /* Caché par défaut */
-    position: static; /* Pas d'absolu sur mobile */
+    display: none;
+    position: static;
     width: 100%;
     background: rgba(0, 0, 0, 0.8);
     text-align: center;
@@ -481,3 +266,33 @@ header {
   }
 }
 
+/* ✅ Correction du player musique */
+#music-controller {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  z-index: 1000;
+}
+
+.music-button {
+  width: 50px;
+  height: 50px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.music-button:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: black;
+}
