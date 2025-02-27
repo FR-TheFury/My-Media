@@ -389,11 +389,41 @@ header {
 }
 
 /* ======================= */
-/* ✅ FIX MENU BURGER MOBILE */
+/* ✅ CORRECTIONS POUR MOBILE ET TABLETTE */
 /* ======================= */
 
-@media (max-width: 700px) {
-  /* 🔹 Ajustement du menu principal */
+@media (max-width: 900px) {
+  /* ✅ Correction du logo */
+  .logo {
+    width: 40px;
+    height: auto;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1001;
+    display: block;
+  }
+
+  /* ✅ Correction du footer qui colle bien en bas */
+  .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  /* ✅ Centrage et ajustement de la vidéo sur mobile */
+  .background-video {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+  }
+
+  /* ✅ Ajustement du menu burger */
   .navbar {
     position: fixed;
     top: 0;
@@ -407,15 +437,15 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start; /* Ajustement */
-    padding-top: 60px; /* Ajout pour éviter l'effet collé */
+    justify-content: flex-start;
+    padding-top: 60px;
   }
 
   #check:checked ~ .navbar {
     height: 100vh;
   }
 
-  /* 🔹 Centrage des liens */
+  /* ✅ Centrage des liens */
   .nav-item {
     display: block;
     font-size: 1.3rem;
@@ -432,23 +462,10 @@ header {
     transition-delay: calc(0.1s * var(--i));
   }
 
-  /* 🔹 Icône de fermeture bien positionnée */
-  .icons {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    font-size: 2.5rem;
-    cursor: pointer;
-    z-index: 1001;
-  }
-
-  /* ======================= */
-  /* ✅ FIX MENU DÉROULANT "GALLERY" */
-  /* ======================= */
-
+  /* ✅ Correction du menu déroulant Gallery */
   .dropdown-menu {
-    display: none; /* Caché par défaut */
-    position: static; /* Pas d'absolu sur mobile */
+    display: none;
+    position: static;
     width: 100%;
     background: rgba(0, 0, 0, 0.8);
     text-align: center;
@@ -458,7 +475,7 @@ header {
     transition: opacity 0.3s ease, transform 0.3s ease;
   }
 
-  /* Affichage SEULEMENT si le parent est actif */
+  /* ✅ Affichage SEULEMENT si le parent est actif */
   .dropdown:hover .dropdown-menu,
   .dropdown-menu.show {
     display: block;
@@ -466,7 +483,7 @@ header {
     transform: translateY(0);
   }
 
-  /* Ajustement des éléments du menu déroulant */
+  /* ✅ Ajustement des éléments du menu déroulant */
   .dropdown-item {
     display: block;
     padding: 12px;
@@ -480,4 +497,3 @@ header {
     color: rgb(168, 239, 255, 0.9);
   }
 }
-
