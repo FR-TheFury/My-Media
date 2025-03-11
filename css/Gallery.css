@@ -105,11 +105,25 @@ header {
     perspective: 1000px; /* Ajoute une perspective pour l'effet 3D */
 }
 
+/* Effet de flip au chargement */
+.flip-animation {
+    transform: rotateY(180deg);
+    opacity: 0;
+    transition: transform 0.8s ease-out, opacity 0.8s ease-out;
+}
+
+.flipped {
+    transform: rotateY(0deg);
+    opacity: 1;
+}
+
 .card-image-wrapper {
     height: 150%; /* Ajusté pour les nouvelles dimensions */
     will-change: transform;
     transform-style: preserve-3d; /* Permet le retournement 3D */
     backface-visibility: hidden; /* Cache l'arrière */
+    will-change: transform;
+    transition: transform 0.3s ease-out;
 }
 
 .card-image-wrapper img {
