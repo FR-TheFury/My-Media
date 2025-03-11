@@ -1,4 +1,3 @@
-const gallery = document.querySelector('.gallery');
 const track = document.querySelector('.gallery-track');
 const cards = document.querySelectorAll('.card');
 const easing = 0.05;
