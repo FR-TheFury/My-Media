@@ -102,11 +102,14 @@ header {
 .card {
     height: 500px; /* Augmenté pour les écrans standards */
     overflow: hidden;
+    perspective: 1000px; /* Ajoute une perspective pour l'effet 3D */
 }
 
 .card-image-wrapper {
     height: 150%; /* Ajusté pour les nouvelles dimensions */
     will-change: transform;
+    transform-style: preserve-3d; /* Permet le retournement 3D */
+    backface-visibility: hidden; /* Cache l'arrière */
 }
 
 .card-image-wrapper img {
