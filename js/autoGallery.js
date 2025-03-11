@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
         { id: "galleryMain", folderId: "15SG6-OX3sa4qV5PTevKl74hkpG3XOvo_" },
         { id: "galleryFig", folderId: "1OwartWamWeCqdsKpUy1D1B1VhisYsYLx" },
         { id: "galleryPrint", folderId: "1hUe3DTeGVczB6iRXA0IT5Nmj57H370MH" },
-        { id: "galleryGif", folderId: "1ON0h93n--3cGcCG7LzIZO99QXJnBPelB" } // Galerie GIF
+        { id: "galleryGif", folderId: "1ON0h93n--3cGcCG7LzIZO99QXJnBPelB" } // Nouvelle galerie GIF
     ];
 
     const API_KEY = "AIzaSyB5WsFxRU6G95rjFliPZM0suaRTfrCu0xI";
@@ -56,16 +56,6 @@ document.addEventListener("DOMContentLoaded", function () {
                         this.src = FALLBACK_IMAGE; // Image de secours
                     };
 
-                    // 🔹 Ajoute une classe temporaire pour l'animation de flip
-                    img.classList.add("flip-animation");
-
-                    img.onload = function () {
-                        setTimeout(() => {
-                            img.classList.remove("flip-animation");
-                            img.classList.add("flipped");
-                        }, 200);
-                    };
-
                     imageWrapper.appendChild(img);
                     card.appendChild(imageWrapper);
                     galleryContainer.appendChild(card);
@@ -75,34 +65,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (data.nextPageToken) {
                     fetchImages(galleryId, folderId, data.nextPageToken);
                 }
-
-                // 🔹 Appliquer l'effet de parallaxe après le chargement des images
-                setTimeout(() => {
-                    activateParallax();
-                }, 500);
             })
             .catch(error => console.error(`❌ Erreur lors du chargement des images pour ${galleryId}:`, error));
     }
 
     galleries.forEach(gallery => fetchImages(gallery.id, gallery.folderId));
 });
-
-/**
- * 🎥 Ajoute un effet de parallaxe aux images
- */
-function activateParallax() {
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(parallax);
-}
-
-function parallax(card) {
-    const wrapper = card.querySelector('.card-image-wrapper');
-    const diff = card.offsetHeight - wrapper.offsetHeight;
-    const { top } = card.getBoundingClientRect();
-    const progress = top / window.innerHeight;
-    const yPos = diff * progress;
-    wrapper.style.transform = `translateY(${yPos}px)`;
-}
-
-window.addEventListener('scroll', activateParallax, false);
-window.addEventListener('resize', activateParallax, false);
