@@ -601,3 +601,15 @@ p {
     color: rgb(168, 239, 255, 0.9);
   }
 }
+
+/* Effet de fade-in au scroll */
+.fade-hidden {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
