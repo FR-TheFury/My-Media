@@ -39,47 +39,79 @@ tsParticles.load("particles-js", {
   });
 
 
+
+
+const avatarSrc = "../img/MeFillante.png"; // Mets ici le chemin vers ton image avatar
+
 function createShootingStar() {
   const container = document.querySelector('.shooting-star-container');
-
-  const startY = Math.random() * window.innerHeight * 0.3;
-  const startX = -100;
-  const endX = window.innerWidth + 100;
-  const endY = startY + window.innerHeight * 0.4;
+  const directions = ['left', 'right', 'top', 'bottom'];
+  const dir = directions[Math.floor(Math.random() * directions.length)];
 
   const star = document.createElement('img');
-  star.src = "../img/MeFillante.png"; // ton image ici
-  star.classList.add("shooting-star");
-  star.style.top = `${startY}px`;
+  star.src = avatarSrc;
+  star.classList.add('shooting-star');
+
+  let startX, startY, endX, endY;
+  const screenW = window.innerWidth;
+  const screenH = window.innerHeight;
+
+  if (dir === 'left' || dir === 'right') {
+    startY = Math.random() * screenH * 0.8;
+    endY = startY + (Math.random() * 100 - 50);
+    if (dir === 'left') {
+      startX = -100;
+      endX = screenW + 100;
+      star.style.transform = "scaleX(1)";
+    } else {
+      startX = screenW + 100;
+      endX = -100;
+      star.style.transform = "scaleX(-1)"; // miroir
+    }
+  } else {
+    startX = Math.random() * screenW * 0.8;
+    endX = startX + (Math.random() * 100 - 50);
+    if (dir === 'top') {
+      startY = -100;
+      endY = screenH + 100;
+    } else {
+      startY = screenH + 100;
+      endY = -100;
+    }
+    // flip vertical optionnel ici si tu veux aussi miroir haut/bas
+  }
+
   star.style.left = `${startX}px`;
+  star.style.top = `${startY}px`;
 
   container.appendChild(star);
 
-  // Attendre un petit délai pour forcer l'animation
-  requestAnimationFrame(() => {
-    star.style.opacity = 1;
-    star.style.transform = `translate(${endX}px, ${endY}px) rotate(45deg)`;
-  });
-
-  // Générer les particules
-  const trail = [];
-  for (let i = 0; i < 12; i++) {
+  // Traînée de particules
+  let interval = setInterval(() => {
     const p = document.createElement("div");
     p.classList.add("particle");
-    p.style.top = `${startY + i * 4}px`;
-    p.style.left = `${startX + i * 4}px`;
+    p.style.left = `${star.getBoundingClientRect().left + 30}px`;
+    p.style.top = `${star.getBoundingClientRect().top + 30}px`;
     container.appendChild(p);
-    trail.push(p);
-  }
+    setTimeout(() => p.remove(), 1500);
+  }, 80);
 
-  // Supprimer étoile + particules après 3 sec
+  // Lancer animation après injection
+  requestAnimationFrame(() => {
+    star.style.opacity = 1;
+    star.style.transition = 'transform 3s linear, opacity 0.5s ease-in-out';
+    star.style.transform += ` translate(${endX - startX}px, ${endY - startY}px)`;
+  });
+
+  // Cleanup
   setTimeout(() => {
+    clearInterval(interval);
     star.remove();
-    trail.forEach(p => p.remove());
   }, 3000);
 }
 
-// une étoile toutes les 1.5 secondes
-setInterval(() => {
+// Commencer immédiatement à l'ouverture
+window.addEventListener('DOMContentLoaded', () => {
   createShootingStar();
-}, 1500);
+  setInterval(createShootingStar, 1500); // 1,5s entre chaque étoile
+});
