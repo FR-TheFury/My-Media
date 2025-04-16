@@ -82,4 +82,4 @@ tsParticles.load("particles-js", {
   // Fais passer une étoile filante toutes les 15 à 30 secondes
   setInterval(() => {
     if (Math.random() > 0.5) createShootingStar();
-  }, 20000);
+  }, 5000);
