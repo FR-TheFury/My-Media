@@ -41,65 +41,61 @@ tsParticles.load("particles-js", {
 
 
 
-const avatarSrc = "../img/MeFillante.png"; // Mets ici le chemin vers ton image avatar
-const sound = document.getElementById("magic-sound");
+    const avatarSrc = "../img/MeFillante.png"; // Mets ici le chemin vers ton image avatar
 
-function createShootingStar() {
-  const container = document.querySelector('.shooting-star-container');
-  const star = document.createElement('img');
-  star.src = avatarSrc;
-  star.classList.add('shooting-star');
+    function createShootingStar() {
+    const container = document.querySelector('.shooting-star-container');
+    const star = document.createElement('img');
+    star.src = avatarSrc;
+    star.classList.add('shooting-star');
 
-  // Aléatoire pour début + fin
-  const fromLeft = Math.random() > 0.5;
-  const screenW = window.innerWidth;
-  const screenH = window.innerHeight;
+    const screenW = window.innerWidth;
+    const screenH = window.innerHeight;
 
-  const startX = fromLeft ? -100 : screenW + 100;
-  const endX = fromLeft ? screenW + 100 : -100;
+    // Points de départ et d'arrivée totalement aléatoires
+    const startX = Math.random() * screenW;
+    const startY = Math.random() * screenH;
+    const endX = Math.random() * screenW;
+    const endY = Math.random() * screenH;
 
-  const startY = Math.random() * screenH * 0.8;
-  const endY = startY + (Math.random() * 150 - 75);
+    // Appliquer la position de départ
+    star.style.left = `${startX}px`;
+    star.style.top = `${startY}px`;
 
-  star.style.left = `${startX}px`;
-  star.style.top = `${startY}px`;
+    // Flip horizontal si on part de droite vers gauche
+    if (endX < startX) {
+        star.style.transform = "scaleX(-1)";
+    }
 
-  if (!fromLeft) star.style.transform = "scaleX(-1)";
+    container.appendChild(star);
 
-  container.appendChild(star);
+    // Génère des particules pendant le vol
+    const trailInterval = setInterval(() => {
+        const p = document.createElement("div");
+        p.classList.add("particle");
+        const rect = star.getBoundingClientRect();
+        p.style.left = `${rect.left + 30}px`;
+        p.style.top = `${rect.top + 30}px`;
+        container.appendChild(p);
+        setTimeout(() => p.remove(), 1500);
+    }, 70);
 
-  // Son ✨
-  sound.currentTime = 0;
-  sound.play().catch(() => {}); // évite erreur autoplay sur certains navigateurs
+    // Lancer l'animation après une frame
+    requestAnimationFrame(() => {
+        star.style.opacity = 1;
+        star.style.transition = 'transform 3s ease-in-out, opacity 0.5s ease-in-out';
+        star.style.transform += ` translate(${endX - startX}px, ${endY - startY}px)`;
+    });
 
-  // Particules dégradées
-  const trailInterval = setInterval(() => {
-    const p = document.createElement("div");
-    p.classList.add("particle");
-    const rect = star.getBoundingClientRect();
-    p.style.left = `${rect.left + 30}px`;
-    p.style.top = `${rect.top + 30}px`;
-    container.appendChild(p);
-    setTimeout(() => p.remove(), 1500);
-  }, 70);
+    // Nettoyage après 3 secondes
+    setTimeout(() => {
+        clearInterval(trailInterval);
+        star.remove();
+    }, 3000);
+    }
 
-  // Animation avec courbe (utilise translate + slight rotate pour effet sinusoïdal)
-  let curve = Math.random() * 60 - 30; // légère rotation
-  requestAnimationFrame(() => {
-    star.style.opacity = 1;
-    star.style.transition = 'transform 3s ease-in-out, opacity 0.5s ease-in-out';
-    star.style.transform += ` translate(${endX - startX}px, ${endY - startY}px) rotate(${curve}deg)`;
-  });
-
-  // Nettoyage
-  setTimeout(() => {
-    clearInterval(trailInterval);
-    star.remove();
-  }, 3000);
-}
-
-// Lancer direct au chargement
-window.addEventListener('DOMContentLoaded', () => {
-  createShootingStar();
-  setInterval(createShootingStar, 1500);
-});
+    // Lancer dès le chargement
+    window.addEventListener('DOMContentLoaded', () => {
+    createShootingStar();
+    setInterval(createShootingStar, 1500);
+    });
