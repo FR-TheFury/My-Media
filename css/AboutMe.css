@@ -619,3 +619,23 @@ p {
   opacity: 1;
   transform: translateY(0);
 }
+
+.shooting-star-container {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 9999;
+}
+
+.shooting-star {
+  position: absolute;
+  width: 60px;
+  height: auto;
+  opacity: 0;
+  transition: transform 1s linear, opacity 0.5s ease-in-out;
+  filter: drop-shadow(0 0 6px white);
+}
