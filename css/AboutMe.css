@@ -635,17 +635,17 @@ p {
   width: 60px;
   height: auto;
   opacity: 0;
-  transition: transform 3s linear, opacity 0.5s ease-in-out;
+  transition: transform 3s ease-in-out, opacity 0.5s ease-in-out;
   filter: drop-shadow(0 0 6px white);
 }
 
 .particle {
   position: absolute;
-  width: 4px;
-  height: 4px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
-  background: white;
-  opacity: 0.2;
+  background: radial-gradient(white, rgba(255, 255, 255, 0));
+  opacity: 0.4;
   animation: fadeOut 1.5s ease-out forwards;
 }
 
