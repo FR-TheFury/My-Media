@@ -52,24 +52,50 @@ tsParticles.load("particles-js", {
     const screenW = window.innerWidth;
     const screenH = window.innerHeight;
 
-    // Points de départ et d'arrivée totalement aléatoires
-    const startX = Math.random() * screenW;
-    const startY = Math.random() * screenH;
-    const endX = Math.random() * screenW;
-    const endY = Math.random() * screenH;
+    const edges = ['top', 'bottom', 'left', 'right'];
+    const startEdge = edges[Math.floor(Math.random() * edges.length)];
 
-    // Appliquer la position de départ
+    let startX, startY, endX, endY;
+
+    switch (startEdge) {
+        case 'top':
+        startX = Math.random() * screenW;
+        startY = -100;
+        endX = Math.random() * screenW;
+        endY = screenH + 100;
+        break;
+        case 'bottom':
+        startX = Math.random() * screenW;
+        startY = screenH + 100;
+        endX = Math.random() * screenW;
+        endY = -100;
+        break;
+        case 'left':
+        startX = -100;
+        startY = Math.random() * screenH;
+        endX = screenW + 100;
+        endY = Math.random() * screenH;
+        break;
+        case 'right':
+        startX = screenW + 100;
+        startY = Math.random() * screenH;
+        endX = -100;
+        endY = Math.random() * screenH;
+        break;
+    }
+
+    // Position initiale
     star.style.left = `${startX}px`;
     star.style.top = `${startY}px`;
 
-    // Flip horizontal si on part de droite vers gauche
+    // Flip miroir si on va de droite vers gauche
     if (endX < startX) {
         star.style.transform = "scaleX(-1)";
     }
 
     container.appendChild(star);
 
-    // Génère des particules pendant le vol
+    // Traînée magique
     const trailInterval = setInterval(() => {
         const p = document.createElement("div");
         p.classList.add("particle");
@@ -80,7 +106,7 @@ tsParticles.load("particles-js", {
         setTimeout(() => p.remove(), 1500);
     }, 70);
 
-    // Lancer l'animation après une frame
+    // Lancer l’animation
     requestAnimationFrame(() => {
         star.style.opacity = 1;
         star.style.transition = 'transform 3s ease-in-out, opacity 0.5s ease-in-out';
@@ -94,7 +120,7 @@ tsParticles.load("particles-js", {
     }, 3000);
     }
 
-    // Lancer dès le chargement
+    // Lancement immédiat
     window.addEventListener('DOMContentLoaded', () => {
     createShootingStar();
     setInterval(createShootingStar, 1500);
