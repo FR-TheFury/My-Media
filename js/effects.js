@@ -39,47 +39,45 @@ tsParticles.load("particles-js", {
   });
 
 
-  function createShootingStar() {
-    const star = document.querySelector('.shooting-star');
-    const container = document.querySelector('.shooting-star-container');
-  
-    // Position de départ aléatoire en haut de l’écran
-    const startY = Math.random() * window.innerHeight * 0.3;
-    const startX = -100;
-    const endX = window.innerWidth + 100;
-    const endY = startY + window.innerHeight * 0.4;
-  
-    // Style initial
-    star.style.top = `${startY}px`;
-    star.style.left = `${startX}px`;
-    star.style.opacity = 1;
-    star.style.transform = `translate(${endX}px, ${endY}px) rotate(45deg)`;
-  
-    // Crée des petites particules
-    let trail = [];
-    for (let i = 0; i < 10; i++) {
-      const particle = document.createElement("div");
-      particle.style.position = "absolute";
-      particle.style.top = `${startY + i * 4}px`;
-      particle.style.left = `${startX + i * 4}px`;
-      particle.style.width = "4px";
-      particle.style.height = "4px";
-      particle.style.borderRadius = "50%";
-      particle.style.background = "white";
-      particle.style.opacity = 0.3;
-      particle.style.zIndex = 9998;
-      container.appendChild(particle);
-      trail.push(particle);
-    }
-  
-    // Nettoyage après animation
-    setTimeout(() => {
-      star.style.opacity = 0;
-      trail.forEach(p => p.remove());
-    }, 5500);
+
+function createShootingStar() {
+  const star = document.querySelector('.shooting-star');
+  const container = document.querySelector('.shooting-star-container');
+
+  const startY = Math.random() * window.innerHeight * 0.3;
+  const startX = -100;
+  const endX = window.innerWidth + 100;
+  const endY = startY + window.innerHeight * 0.4;
+
+  star.style.top = `${startY}px`;
+  star.style.left = `${startX}px`;
+  star.style.opacity = 1;
+  star.style.transform = `translate(${endX}px, ${endY}px) rotate(45deg)`;
+
+  // Particules
+  let trail = [];
+  for (let i = 0; i < 12; i++) {
+    const particle = document.createElement("div");
+    particle.style.position = "absolute";
+    particle.style.top = `${startY + i * 4}px`;
+    particle.style.left = `${startX + i * 4}px`;
+    particle.style.width = "4px";
+    particle.style.height = "4px";
+    particle.style.borderRadius = "50%";
+    particle.style.background = "white";
+    particle.style.opacity = 0.3;
+    particle.style.zIndex = 9998;
+    container.appendChild(particle);
+    trail.push(particle);
   }
-  
-  // Fais passer une étoile filante toutes les 15 à 30 secondes
-  setInterval(() => {
-    if (Math.random() > 0.5) createShootingStar();
-  }, 1000);
+
+  setTimeout(() => {
+    star.style.opacity = 0;
+    trail.forEach(p => p.remove());
+  }, 3000); // 3 sec d’affichage
+}
+
+// une étoile toutes les 1.5 sec
+setInterval(() => {
+  createShootingStar();
+}, 1500);
