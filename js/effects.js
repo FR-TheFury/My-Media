@@ -39,9 +39,7 @@ tsParticles.load("particles-js", {
   });
 
 
-
 function createShootingStar() {
-  const star = document.querySelector('.shooting-star');
   const container = document.querySelector('.shooting-star-container');
 
   const startY = Math.random() * window.innerHeight * 0.3;
@@ -49,35 +47,39 @@ function createShootingStar() {
   const endX = window.innerWidth + 100;
   const endY = startY + window.innerHeight * 0.4;
 
+  const star = document.createElement('img');
+  star.src = "../img/MeFillante.png"; // ton image ici
+  star.classList.add("shooting-star");
   star.style.top = `${startY}px`;
   star.style.left = `${startX}px`;
-  star.style.opacity = 1;
-  star.style.transform = `translate(${endX}px, ${endY}px) rotate(45deg)`;
 
-  // Particules
-  let trail = [];
+  container.appendChild(star);
+
+  // Attendre un petit délai pour forcer l'animation
+  requestAnimationFrame(() => {
+    star.style.opacity = 1;
+    star.style.transform = `translate(${endX}px, ${endY}px) rotate(45deg)`;
+  });
+
+  // Générer les particules
+  const trail = [];
   for (let i = 0; i < 12; i++) {
-    const particle = document.createElement("div");
-    particle.style.position = "absolute";
-    particle.style.top = `${startY + i * 4}px`;
-    particle.style.left = `${startX + i * 4}px`;
-    particle.style.width = "4px";
-    particle.style.height = "4px";
-    particle.style.borderRadius = "50%";
-    particle.style.background = "white";
-    particle.style.opacity = 0.3;
-    particle.style.zIndex = 9998;
-    container.appendChild(particle);
-    trail.push(particle);
+    const p = document.createElement("div");
+    p.classList.add("particle");
+    p.style.top = `${startY + i * 4}px`;
+    p.style.left = `${startX + i * 4}px`;
+    container.appendChild(p);
+    trail.push(p);
   }
 
+  // Supprimer étoile + particules après 3 sec
   setTimeout(() => {
-    star.style.opacity = 0;
+    star.remove();
     trail.forEach(p => p.remove());
-  }, 3000); // 3 sec d’affichage
+  }, 3000);
 }
 
-// une étoile toutes les 1.5 sec
+// une étoile toutes les 1.5 secondes
 setInterval(() => {
   createShootingStar();
 }, 1500);
