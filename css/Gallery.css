@@ -333,3 +333,37 @@ header {
 .main-content {
     flex: 1;
 }
+
+.shooting-star-container {
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    overflow: hidden;
+  }
+  
+  .shooting-star {
+    position: absolute;
+    width: 60px;
+    height: auto;
+    opacity: 0;
+    transition: transform 3s ease-in-out, opacity 0.5s ease-in-out;
+    filter: drop-shadow(0 0 6px white);
+  }
+  
+  .particle {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: radial-gradient(white, rgba(255, 255, 255, 0));
+    opacity: 0.4;
+    animation: fadeOut 1.5s ease-out forwards;
+  }
+  
+  @keyframes fadeOut {
+    to {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+  }  
