@@ -109,7 +109,7 @@ header {
 .card {
     height: 500px; /* Augmenté pour les écrans standards */
     overflow: hidden;
-    background-color: black;
+    background-color: transparent;
 }
 
 .card-image-wrapper {
