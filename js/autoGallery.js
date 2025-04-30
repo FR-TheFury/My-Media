@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     const galleries = [
         { id: "galleryMain", folderId: "15SG6-OX3sa4qV5PTevKl74hkpG3XOvo_" },
+        { id: "galleryAIDesign", folderId: "1BLJGB6RYfR3JhObluxAFRF550C5smxyw" },
         { id: "galleryFig", folderId: "1OwartWamWeCqdsKpUy1D1B1VhisYsYLx" },
         { id: "galleryPrint", folderId: "1hUe3DTeGVczB6iRXA0IT5Nmj57H370MH" },
         { id: "galleryGif", folderId: "1ON0h93n--3cGcCG7LzIZO99QXJnBPelB" } // Nouvelle galerie GIF
