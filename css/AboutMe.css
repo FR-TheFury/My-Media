@@ -31,8 +31,7 @@ body {
 /* ─── HEADER ───────────────────────────────────────────────────────── */
 header {
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 0; left: 0;
   height: var(--header-height);
   width: 100%;
   background: rgba(0, 0, 0, 0.8);
@@ -93,14 +92,19 @@ header {
 /* ─── WRAPPER 3 COLONNES & IMAGES LATÉRALES FIXES ─────────────────── */
 .content-wrapper {
   position: relative;
+  display: grid;
+  grid-template-columns: var(--side-image-width) 1fr var(--side-image-width);
   width: 100%;
-  flex: 1;
+  margin: 0;
+  padding: 0;
+}
+.content-wrapper > .container {
+  padding: 20px;
 }
 .side-image {
-  position: fixed;
-  top: var(--header-height);
+  position: absolute;
+  top: 0; bottom: 0;
   width: var(--side-image-width);
-  height: calc(100vh - var(--header-height));
   overflow: hidden;
   z-index: 500;
 }
@@ -111,17 +115,16 @@ header {
   right: 0;
 }
 .side-image img {
-  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 }
 
 /* ─── CONTENEUR CENTRAL ────────────────────────────────────────────── */
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
 }
 
 /* ─── HÉADING & PARAGRAPHES ───────────────────────────────────────── */
@@ -246,7 +249,7 @@ p {
 .dropdown-item {
   color: #fff;
   padding: 0.5rem 1rem;
-  transition: background 0.3s;
+  transition: background 0.3s ease;
 }
 .dropdown-item:hover {
   background-color: rgba(168, 239, 255, 0.2);
@@ -266,7 +269,7 @@ p {
   text-transform: uppercase;
   letter-spacing: 2px;
   width: 180px;
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   overflow: hidden;
 }
@@ -287,7 +290,7 @@ p {
   color: #fff;
 }
 
-/* ─── FADE-IN AU SCROLL ─────────────────────────────────────────── */
+/* ─── FADE-IN & SHOOTING STARS ───────────────────────────────────── */
 .fade-hidden {
   opacity: 0;
   transform: translateY(20px);
@@ -298,7 +301,6 @@ p {
   transform: translateY(0);
 }
 
-/* ─── SHOOTING STARS ────────────────────────────────────────────── */
 .shooting-star-container {
   position: fixed;
   inset: 0;
@@ -327,18 +329,18 @@ p {
   }
 }
 
-/* ─── MEDIA QUERIES GLOBALES ────────────────────────────────────── */
-/* NE MASQUER QUE SOUS 320px */
+/* ─── MEDIA QUERIES ───────────────────────────────────────────────── */
+
+/* Ne masquer que sous 320px */
 @media (max-width: 320px) {
   .side-image {
     display: none;
   }
 }
 
-/* MENU & HEADER MOBILE (≤ 900px) */
+/* ≤ 900px (mobile menu, header) */
 @media (max-width: 900px) {
   header {
-    padding: 0 5%;
     background: rgba(0, 0, 0, 0.9);
   }
   .icons {
@@ -354,7 +356,7 @@ p {
   }
 }
 
-/* TABLETTE PETITE (≤ 700px) */
+/* ≤ 700px (tablette) */
 @media (max-width: 700px) {
   .nav-item {
     display: block;
@@ -363,14 +365,14 @@ p {
   }
 }
 
-/* TITRES TRÈS PETITS (≤ 620px) */
+/* ≤ 620px (titres petits) */
 @media (max-width: 620px) {
   h1 {
     font-size: 5rem;
   }
 }
 
-/* ÉCRANS MINI (≤ 450px) */
+/* ≤ 450px (mini écrans) */
 @media (max-width: 450px) {
   h1 {
     font-size: 3rem;
