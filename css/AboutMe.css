@@ -681,13 +681,13 @@ p {
   object-fit: cover;
 }
 
-/* ─── Cacher les colonnes latérales sur tout petit écran ───────────────── */
+/* ─── Cacher les colonnes latérales sur tout petit écran ─────────────────
 @media (max-width: 320px) {
   .side-image {
     display: none;
   }
   .content-wrapper {
-    display: block;    /* revient à l’ancien flow */
-    padding: 0 10px;   /* un petit padding intérieur */
+    display: block;     revient à l’ancien flow 
+    padding: 0 10px;    un petit padding intérieur 
   }
-}
+} */
