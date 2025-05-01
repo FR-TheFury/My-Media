@@ -1,19 +1,19 @@
+/* File: AboutMe.css */
+
+/* Import des polices */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Rubik+Iso&display=swap');
 
+/* Réinitialisation de base */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+/* Corps de page */
 body {
   font-family: "Poppins", sans-serif;
-
-  /*font-family: "Rubik Iso", system-ui;
-  font-weight: 400;
-  font-style: normal;*/
-
   background-color: #1a1a1a;
   min-height: 100vh;
   display: flex;
@@ -21,6 +21,7 @@ body {
   color: #f4f4f4;
 }
 
+/* Header fixe */
 header {
   position: fixed;
   background-color: rgba(0, 0, 0, 0.705);
@@ -34,10 +35,12 @@ header {
   z-index: 5;
 }
 
+/* Logo */
 .logo {
   width: 40px;
 }
 
+/* Navigation */
 .nav-item {
   position: relative;
   color: #fff;
@@ -49,11 +52,9 @@ header {
   margin-left: 2.5rem;
   transition: all 0.5s ease;
 }
-
 .nav-item:hover {
   color: rgb(168, 239, 255, 0.9);
 }
-
 .nav-item::after {
   content: "";
   position: absolute;
@@ -65,11 +66,11 @@ header {
   background-color: rgb(168, 239, 255, 0.9);
   transition: all 0.5s ease;
 }
-
 .nav-item:hover::after {
   width: 100%;
 }
 
+/* Icônes mobile */
 .icons {
   position: absolute;
   right: 5%;
@@ -78,11 +79,11 @@ header {
   cursor: pointer;
   display: none;
 }
-
 #check {
   display: none;
 }
 
+/* Conteneur central */
 .container {
   flex: 1;
   max-width: 1200px;
@@ -90,34 +91,33 @@ header {
   padding: 20px;
 }
 
+/* Titres */
 h1, h2, h3 {
   color: #f4f4f4;
 }
-
 h1 {
   font-size: 3rem;
   text-align: center;
   margin-bottom: 10px;
 }
-
 h2 {
   font-size: 2rem;
   margin-bottom: 10px;
   color: #f39c12;
 }
 
+/* Paragraphes */
 p {
   margin: 10px 0;
 }
 
-/* Section introduction */
+/* Section Introduction */
 .about-me {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   margin-top: 40px;
 }
-
 .about-me img {
   max-width: 50%;
   height: auto;
@@ -125,32 +125,27 @@ p {
   margin: 20px 0;
   flex: 1;
 }
-
 .about-me-text {
   flex: 2;
   padding: 20px;
 }
-
 .about-me-text h2 {
   font-size: 2.5rem;
   margin-bottom: 20px;
 }
 
-/* Section compétences */
+/* Section Compétences */
 .skills {
   margin: 40px 0;
 }
-
 .skills .skill {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
 }
-
 .skills .skill-name {
   flex: 1;
 }
-
 .skills .skill-bar {
   flex: 3;
   height: 10px;
@@ -158,45 +153,38 @@ p {
   border-radius: 5px;
   overflow: hidden;
 }
-
 .skills .skill-bar-inner {
   height: 100%;
   background-color: #3498db;
   border-radius: 5px;
 }
 
-/* Section expérience */
+/* Section Expérience */
 .experience {
   margin: 40px 0;
 }
-
 .experience h2 {
   margin-bottom: 20px;
 }
-
 .experience-item {
   margin-bottom: 20px;
 }
-
 .experience-item h3 {
   margin: 0;
   color: #f39c12;
 }
-
 .experience-item p {
   margin: 5px 0;
 }
 
-/* Section intérêts */
+/* Section Intérêts */
 .interests {
   margin: 40px 0;
 }
-
 .interests ul {
   list-style: none;
   padding: 0;
 }
-
 .interests ul li {
   display: inline-block;
   margin-right: 20px;
@@ -215,121 +203,16 @@ p {
   margin-top: auto;
 }
 
-@media (max-width: 900px) {
-  header {
-    padding: 1.3rem 5%;
-  }
-}
-
-@media (max-width: 700px) {
-  header::before {
-    content: "";
-    top: 0;
-    left: 0;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(50px);
-    z-index: -1;
-  }
-
-  header::after {
-    content: "";
-    top: 0;
-    left: -100%;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.4),
-      transparent
-    );
-    transition: 0.8s;
-  }
-
-  .icons {
-    display: inline-flex;
-  }
-
-  #check:checked ~ .icons #menu-icon {
-    display: none;
-  }
-
-  .icons #close-icon {
-    display: none;
-  }
-
-  #check:checked ~ .icons #close-icon {
-    display: block;
-  }
-
-  .navbar {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    height: 0;
-    background: rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(50px);
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: all 0.3s ease;
-  }
-
-  #check:checked ~ .navbar {
-    height: 17.7rem;
-  }
-
-  .nav-item {
-    display: block;
-    font-size: 1.1rem;
-    margin: 2rem 0;
-    text-align: center;
-    transform: translateY(-50px);
-    opacity: 0;
-    transition: all 0.3s ease;
-  }
-
-  .nav-item:hover::after {
-    width: auto;
-  }
-
-  #check:checked ~ .navbar a {
-    transform: translateY(0);
-    opacity: 1;
-    transition-delay: calc(0.15s * var(--i));
-  }
-}
-
-@media (max-width: 620px) {
-  .content h1 {
-    font-size: 5rem;
-  }
-}
-
-@media (max-width: 450px) {
-  .content h1 {
-    font-size: 3rem;
-  }
-  
-  .btn {
-    width: 130px;
-  }
-  
-  .light::after {
-    width: 120px;
-    font-size: 0.9rem;
-  }
-}
-
+/* Dropdown */
 .dropdown-menu {
   background-color: rgba(0, 0, 0, 0.8);
   border: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
-
+.dropdown-menu.show {
+  opacity: 1;
+}
 .dropdown-item {
   color: #fff;
   font-size: 1rem;
@@ -337,30 +220,16 @@ p {
   padding: 0.5rem 1rem;
   transition: all 0.3s ease;
 }
-
 .dropdown-item:hover {
   background-color: rgb(168, 239, 255, 0.2);
   color: rgb(168, 239, 255, 0.9);
 }
-
 .dropdown-toggle::after {
   content: '';
   border: none;
 }
 
-.dropdown-menu.show {
-  opacity: 1;
-  transition: opacity 0.3s ease;
-}
-
-.dropdown-menu {
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-
-
-/* Uniformisation des boutons */
+/* Boutons */
 .container .btn {
   font-size: 18px;
   font-weight: bold;
@@ -372,38 +241,28 @@ p {
   overflow: hidden;
   text-transform: uppercase;
   letter-spacing: 2px;
-  width: 180px; /* Taille uniforme */
+  width: 180px;
   text-align: center;
 }
-
-/* Twitch Button */
 .btn-primary {
   background: linear-gradient(45deg, #6441a5, #9b5de5);
   color: white;
   border-color: #fff;
 }
-
-/* TikTok Button */
 .btn-danger {
   background: linear-gradient(45deg, #ff0050, #ff8c00);
   color: white;
   border-color: #fff;
 }
-
-/* Instagram Button */
 .btn-warning {
   background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
   color: white;
   border-color: #fff;
 }
-
-/* Effet Neon Glow */
 .container .btn:hover {
   transform: scale(1.1);
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
 }
-
-/* Animation Glitch au survol */
 .container .btn::before {
   content: "";
   position: absolute;
@@ -417,23 +276,17 @@ p {
   transform: translateX(-100%);
   transition: transform 0.3s ease-in-out;
 }
-
 .container .btn:hover::before {
   transform: translateX(100%);
 }
-
-/* Animation Pulsation après le clic */
 .container .btn:active {
   animation: pulse 0.2s ease-in-out;
 }
-
 @keyframes pulse {
   0% { transform: scale(1.2); }
   50% { transform: scale(0.9); }
   100% { transform: scale(1); }
 }
-
-/* Effet de scan lumineux */
 .container .btn::after {
   content: "";
   position: absolute;
@@ -444,17 +297,60 @@ p {
   background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 10%, transparent 70%);
   transition: transform 0.4s ease-in-out;
 }
-
 .container .btn:hover::after {
   transform: translate(100%, 100%);
 }
 
-/* ======================= */
-/* ✅ CORRECTIONS POUR MOBILE ET TABLETTE */
-/* ======================= */
+/* Effets de fade-in */
+.fade-hidden {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
 
+/* Shooting Stars */
+.shooting-star-container {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  overflow: hidden;
+}
+.shooting-star {
+  position: absolute;
+  width: 60px;
+  height: auto;
+  opacity: 0;
+  transition: transform 3s ease-in-out, opacity 0.5s ease-in-out;
+  filter: drop-shadow(0 0 6px white);
+}
+.particle {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: radial-gradient(white, rgba(255, 255, 255, 0));
+  opacity: 0.4;
+  animation: fadeOut 1.5s ease-out forwards;
+}
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+}
+
+/* Media queries : mobile & tablette */
+
+/* Header & menu burger */
 @media (max-width: 900px) {
-  /* ✅ Correction du logo */
+  header {
+    padding: 1.3rem 5%;
+  }
   .logo {
     width: 40px;
     height: auto;
@@ -464,76 +360,34 @@ p {
     z-index: 1001;
     display: block;
   }
-
-
-  /* ✅ Ajustement du menu burger pour qu'il soit bien visible */
   .icons {
     display: flex;
     position: absolute;
     top: 15px;
-    right: 15px; /* ✅ Ajustement pour ne pas qu'il sorte de l'écran */
+    right: 15px;
     font-size: 2.5rem;
     cursor: pointer;
     z-index: 1002;
   }
-
-  /* ✅ Correction du header pour éviter qu'il ne masque le menu */
-  header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 60px;
-    background: rgba(0, 0, 0, 0.9);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 15px;
-    z-index: 1001;
-  }
-
   #menu-icon {
     display: block;
     color: white;
   }
-
   #close-icon {
     display: none;
     color: white;
   }
-
   #check:checked ~ .icons #menu-icon {
     display: none;
   }
-
   #check:checked ~ .icons #close-icon {
     display: block;
   }
-
-  #check:checked ~ .navbar {
-    height: 100vh;
+  header {
+    height: 60px;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 0 15px;
   }
-
-  /* ✅ Correction du footer qui colle bien en bas */
-  .footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-  }
-
-  /* ✅ Centrage et ajustement de la vidéo sur mobile */
-  .background-video {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    transform: translate(-50%, -50%);
-  }
-
-  /* ✅ Empêcher le menu de disparaître en mobile */
   .navbar {
     position: fixed;
     top: 0;
@@ -550,29 +404,9 @@ p {
     justify-content: flex-start;
     padding-top: 60px;
   }
-
   #check:checked ~ .navbar {
     height: 100vh;
   }
-
-  /* ✅ Centrage des liens */
-  .nav-item {
-    display: block;
-    font-size: 1.3rem;
-    margin: 1rem 0;
-    text-align: center;
-    opacity: 0;
-    transform: translateY(-20px);
-    transition: all 0.3s ease-in-out;
-  }
-
-  #check:checked ~ .navbar a {
-    transform: translateY(0);
-    opacity: 1;
-    transition-delay: calc(0.1s * var(--i));
-  }
-
-  /* ✅ Correction du menu déroulant Gallery */
   .dropdown-menu {
     display: none;
     position: static;
@@ -584,16 +418,12 @@ p {
     transform: translateY(-10px);
     transition: opacity 0.3s ease, transform 0.3s ease;
   }
-
-  /* ✅ Affichage SEULEMENT si le parent est actif */
   .dropdown:hover .dropdown-menu,
   .dropdown-menu.show {
     display: block;
     opacity: 1;
     transform: translateY(0);
   }
-
-  /* ✅ Ajustement des éléments du menu déroulant */
   .dropdown-item {
     display: block;
     padding: 12px;
@@ -601,58 +431,83 @@ p {
     color: white;
     text-decoration: none;
   }
-
   .dropdown-item:hover {
     background-color: rgba(168, 239, 255, 0.2);
     color: rgb(168, 239, 255, 0.9);
   }
+  .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
 }
 
-/* Effet de fade-in au scroll */
-.fade-hidden {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 1s ease, transform 1s ease;
-}
-
-.fade-in {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-
-
-.shooting-star-container {
-  pointer-events: none;
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  overflow: hidden;
-}
-
-.shooting-star {
-  position: absolute;
-  width: 60px;
-  height: auto;
-  opacity: 0;
-  transition: transform 3s ease-in-out, opacity 0.5s ease-in-out;
-  filter: drop-shadow(0 0 6px white);
-}
-
-.particle {
-  position: absolute;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: radial-gradient(white, rgba(255, 255, 255, 0));
-  opacity: 0.4;
-  animation: fadeOut 1.5s ease-out forwards;
-}
-
-@keyframes fadeOut {
-  to {
+/* Ajustements pour très petits tablettes */
+@media (max-width: 700px) {
+  header::before {
+    content: "";
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(50px);
+    z-index: -1;
+  }
+  header::after {
+    content: "";
+    top: 0;
+    left: -100%;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent
+    );
+    transition: 0.8s;
+  }
+  #check:checked ~ .navbar {
+    height: 100vh;
+  }
+  .nav-item {
+    display: block;
+    font-size: 1.1rem;
+    margin: 2rem 0;
+    text-align: center;
+    transform: translateY(-50px);
     opacity: 0;
-    transform: scale(0.5);
+    transition: all 0.3s ease;
+  }
+  #check:checked ~ .navbar a {
+    transform: translateY(0);
+    opacity: 1;
+    transition-delay: calc(0.15s * var(--i));
+  }
+}
+
+/* Titres ajustés */
+@media (max-width: 620px) {
+  .content h1 {
+    font-size: 5rem;
+  }
+}
+
+/* Très petits écrans */
+@media (max-width: 450px) {
+  .content h1 {
+    font-size: 3rem;
+  }
+  .btn {
+    width: 130px;
+  }
+  .light::after {
+    width: 120px;
+    font-size: 0.9rem;
   }
 }
 
@@ -660,34 +515,34 @@ p {
 .content-wrapper {
   display: grid;
   grid-template-columns: 25% 1fr 25%;
-  gap: 0;               /* plus de marge entre les colonnes */
+  gap: 0;
   align-items: start;
-  width: 100%;          /* occupe tout l’horizontale */
-  margin: 0;            /* supprime toute marge extérieure */
-  padding: 0;           /* supprime tout padding intérieur */
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
-/* retire le padding par défaut sur .container si besoin */
+/* Supprime le padding par défaut du container central */
 .content-wrapper > .container {
   padding: 0;
 }
 
-/* Images latérales à pleine largeur de leur colonne */
+/* Images latérales plein largeur de leur colonne */
 .side-image img {
   display: block;
   width: 100%;
   height: auto;
-  border-radius: 10px;
   object-fit: cover;
+  border-radius: 10px;
 }
 
-/* ─── Cacher les colonnes latérales sur tout petit écran ─────────────────
+/* Ne masquer QUE sous 320px */
 @media (max-width: 320px) {
   .side-image {
     display: none;
   }
   .content-wrapper {
-    display: block;     revient à l’ancien flow 
-    padding: 0 10px;    un petit padding intérieur 
+    display: block;
+    padding: 0 10px;
   }
-} */
+}
