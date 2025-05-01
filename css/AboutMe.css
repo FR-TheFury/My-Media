@@ -682,7 +682,7 @@ p {
 }
 
 /* ─── Cacher les colonnes latérales sur tout petit écran ───────────────── */
-@media (max-width: 480px) {
+@media (max-width: 320px) {
   .side-image {
     display: none;
   }
