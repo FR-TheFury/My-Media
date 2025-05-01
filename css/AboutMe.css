@@ -656,17 +656,23 @@ p {
   }
 }
 
-/* ─── Wrapper 3 colonnes ───────────────────────────────── */
+/* ─── Wrapper 3 colonnes plein écran ─────────────────────────────── */
 .content-wrapper {
   display: grid;
-  grid-template-columns: 200px 1fr 200px;
-  gap: 20px;
+  grid-template-columns: 25% 1fr 25%;
+  gap: 0;               /* plus de marge entre les colonnes */
   align-items: start;
-  margin: 0 auto;
-  padding: 20px;
-  max-width: calc(1200px + 200px*2 + 20px*2);
+  width: 100%;          /* occupe tout l’horizontale */
+  margin: 0;            /* supprime toute marge extérieure */
+  padding: 0;           /* supprime tout padding intérieur */
 }
 
+/* retire le padding par défaut sur .container si besoin */
+.content-wrapper > .container {
+  padding: 0;
+}
+
+/* Images latérales à pleine largeur de leur colonne */
 .side-image img {
   display: block;
   width: 100%;
@@ -675,14 +681,13 @@ p {
   object-fit: cover;
 }
 
-/* NE CACHEZ QUE SOUS 576px */
-@media (max-width: 576px) {
-  .content-wrapper {
-    display: block;
-    padding: 0 20px;
-    max-width: 100%;
-  }
+/* ─── Cacher les colonnes latérales sur tout petit écran ───────────────── */
+@media (max-width: 480px) {
   .side-image {
     display: none;
+  }
+  .content-wrapper {
+    display: block;    /* revient à l’ancien flow */
+    padding: 0 10px;   /* un petit padding intérieur */
   }
 }
