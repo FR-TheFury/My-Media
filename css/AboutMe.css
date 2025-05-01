@@ -655,3 +655,36 @@ p {
     transform: scale(0.5);
   }
 }
+
+/* ─── Wrapper 3 colonnes ─────────────────────────────────────────────────── */
+.content-wrapper {
+  display: grid;
+  grid-template-columns: 200px 1fr 200px;
+  gap: 20px;
+  align-items: start;
+  margin: 0 auto;
+  padding: 20px;
+  max-width: calc(1200px + 200px*2 + 20px*2); /* pour centrer proprement */
+}
+
+/* Images latérales */
+.side-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+/* Masquer les colonnes sur écran étroit */
+@media (max-width: 768px) {
+  .content-wrapper {
+    display: block;  /* revient à l’ancien comportement */
+    padding: 0 20px;
+    max-width: 100%;
+  }
+  .side-image {
+    display: none;
+  }
+}
+
