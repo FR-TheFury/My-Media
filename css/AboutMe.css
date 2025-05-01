@@ -656,18 +656,18 @@ p {
   }
 }
 
-/* ─── Wrapper 3 colonnes ─────────────────────────────────────────────────── */
+/* ─── Wrapper 3 colonnes autour du container ───────────────────────── */
 .content-wrapper {
   display: grid;
   grid-template-columns: 200px 1fr 200px;
   gap: 20px;
   align-items: start;
+  max-width: calc(1200px + 200px*2 + 20px*2);
   margin: 0 auto;
   padding: 20px;
-  max-width: calc(1200px + 200px*2 + 20px*2); /* pour centrer proprement */
 }
 
-/* Images latérales */
+/* Style des images latérales */
 .side-image img {
   display: block;
   width: 100%;
@@ -676,10 +676,10 @@ p {
   object-fit: cover;
 }
 
-/* Masquer les colonnes sur écran étroit */
+/* Masquer les colonnes latérales sur mobile */
 @media (max-width: 768px) {
   .content-wrapper {
-    display: block;  /* revient à l’ancien comportement */
+    display: block;
     padding: 0 20px;
     max-width: 100%;
   }
@@ -687,4 +687,3 @@ p {
     display: none;
   }
 }
-
