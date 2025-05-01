@@ -105,6 +105,8 @@ header {
   position: absolute;
   top: 0; bottom: 0;
   width: var(--side-image-width);
+  overflow: hidden;
+  z-index: 500;
 }
 .side-image.left {
   left: 0;
