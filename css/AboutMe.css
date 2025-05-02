@@ -109,6 +109,7 @@ header {
 }
 .side-image.right {
   right: 0;
+  z-index: 500;
 }
 .side-image img {
   display: block;
